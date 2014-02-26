@@ -7,6 +7,7 @@ angular.module('myApp.services')
             var authWithTrello = function () {
                 Trello.authorize({
                     success: callback,
+                    type: 'popup',
                     interactive: true,
                     scope: { write: true, read: true },
                     name: "Trello Planning Poker",
