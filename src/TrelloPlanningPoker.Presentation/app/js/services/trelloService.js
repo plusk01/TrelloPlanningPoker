@@ -5,12 +5,13 @@ angular.module('myApp.services')
         var authenticate = function(callback) {
             Trello.authorize({
                 success: callback,
+                interactive: false,
                 scope: { write: true, read: true },
                 name: "Trello Planning Poker",
                 persist: true
             });
         };
-        
+
         return {
             getUser: function() {
                 var def = $q.defer();
@@ -30,7 +31,7 @@ angular.module('myApp.services')
                 });
                 return def.promise;
             },
-            getBoard: function (boardId) {
+            getBoard: function(boardId) {
                 var def = $q.defer();
                 authenticate(function() {
                     Trello.get("/boards/" + boardId, function(board) {
@@ -38,7 +39,7 @@ angular.module('myApp.services')
                     });
                 });
                 return def.promise;
-            },            
+            },
             getLists: function(boardId) {
                 var def = $q.defer();
                 authenticate(function() {
@@ -56,7 +57,7 @@ angular.module('myApp.services')
                     });
                 });
                 return def.promise;
-            },            
+            },
             getCards: function(listId) {
                 var def = $q.defer();
                 authenticate(function() {
@@ -69,17 +70,17 @@ angular.module('myApp.services')
             getCard: function(cardId) {
                 var def = $q.defer();
                 authenticate(function() {
-                    Trello.get("/cards/" + cardId, function (card) {
+                    Trello.get("/cards/" + cardId, function(card) {
                         def.resolve(card);
                     });
                 });
                 return def.promise;
             },
-            applyPoints: function (boardId, listId, cardsWithPoints, onProgress) {
+            applyPoints: function(boardId, listId, cardsWithPoints, onProgress) {
                 var def = $q.defer();
-                authenticate(function () {
+                authenticate(function() {
                     var work = [];
-                    _.each(cardsWithPoints, function (c) {
+                    _.each(cardsWithPoints, function(c) {
                         var nameWithoutPoints = c.name.replace(/\(\d+\) /g, '');
                         var newName = "(" + c.points + ") " + nameWithoutPoints;
                         work.push(Trello.put("/cards/" + c.id, { name: newName }, function(response) {
@@ -87,7 +88,7 @@ angular.module('myApp.services')
                         }));
                     });
 
-                    $q.all(work).then(function () {
+                    $q.all(work).then(function() {
                         def.resolve();
                     });
                 });
