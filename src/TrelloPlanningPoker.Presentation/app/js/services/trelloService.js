@@ -4,19 +4,27 @@ angular.module('myApp.services')
 
         var authenticate = function(callback) {
 
-            Trello.authorize({
-                error: function () {
-                    Trello.authorize({
-                        success: callback,
-                        interactive: true,
-                        scope: { write: true, read: true },
-                        name: "Trello Planning Poker",
-                        persist: true
-                    });
-                },
-                success: callback,
-                interactive: false,
-            });
+            var authWithTrello = function () {
+                Trello.authorize({
+                    success: callback,
+                    interactive: true,
+                    scope: { write: true, read: true },
+                    name: "Trello Planning Poker",
+                    persist: true
+                });
+            };
+
+            var authWithLocalStoreage = function () {
+                Trello.authorize({
+                    error: function (a, b, c) {
+                        authWithTrello();
+                    },
+                    success: callback,
+                    interactive: false,
+                });
+            };
+
+            authWithLocalStoreage();
         };
         
         
