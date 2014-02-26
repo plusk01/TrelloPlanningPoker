@@ -2,37 +2,17 @@
 angular.module('myApp.services')
     .service('trelloService', ['$q', function($q) {
 
-        var authenticate = function(callback) {
+        var authenticate = function (onAuth) {
 
-            var authWithTrello = function () {
+            if (!Trello.authorized()) {
                 Trello.authorize({
-                    success: function () {
-                        if (Trello.authorized())
-                            callback();
-                        else {
-                            throw new Error("Auth failed.");
-                        }
-                    },
-                    type: 'redirect',
                     interactive: true,
+                    success: onAuth,
                     scope: { write: true, read: true },
                     name: "Trello Planning Poker",
                     persist: true
                 });
-            };
-
-            var authWithLocalStoreage = function () {
-                Trello.authorize({
-                    error: function () {
-                        if (!Trello.authorized())
-                            authWithTrello();                        
-                    },
-                    success: callback,
-                    interactive: false,
-                });
-            };
-
-            authWithLocalStoreage();
+            }
         };
         
         
