@@ -5,7 +5,7 @@ angular.module('myApp.controllers')
 
             $scope.isLoading = true;
             
-            $scope.sizes = [1, 2, 3, 5, 8, 13, 21];
+            $scope.sizes = [.5, 1, 2, 3, 5, 8, 13, 21];
 
             var intervalId;
             var getSizes = function () {
