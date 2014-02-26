@@ -1,0 +1,16 @@
+/* app css stylesheet */
+
+body { 
+    padding-top: 65px; 
+}
+
+ul.touchList li { font-size: 1.3em; }
+
+.sizes{}
+.size{ display: inline; }
+
+.allSizes table tbody tr td { padding-right: 10px;}
+
+table.cards{ width: 100%;}
+table.cards thead tr th { background-color: #EEEEEE;}
+table.cards tbody tr td { border-bottom: #CCCCCC solid 1px;}

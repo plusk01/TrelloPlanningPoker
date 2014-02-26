@@ -1,0 +1,43 @@
+﻿<h1>{{board.name}}/{{list.name}}</h1>
+<p>Started on {{game.created}} by {{game.creator}}</p>
+
+<p>
+    <table class="cards">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Avg</th>
+                <th>Min</th>
+                <th>Max</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="c in cards">
+                <td>{{c.number}}</td>
+                <td><a ng-click="viewCard(c.id)">{{c.name}}</a></td>
+                <td>{{c.aggregateSize.average}}</td>
+                <td>{{c.aggregateSize.min}}</td>
+                <td>{{c.aggregateSize.max}}</td>
+                <td>{{c.aggregateSize.count}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>        
+</p>
+
+<br/>
+<p>
+    <button class="btn btn-primary" ng-click="applyPointsToCardsInTrello()">Apply To Trello</button>
+    <span ng-show="isApplying">Finished: {{cardsApplied}} of {{totalCardsWithPoints}}</span>    
+</p>

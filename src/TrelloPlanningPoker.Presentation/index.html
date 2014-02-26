@@ -1,27 +1,74 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+<!doctype html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Trello Planning Poker</title>
+        <link rel="stylesheet" href="app/css/app.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" href="app/lib/bootstrap-3.1.0/css/bootstrap.css" />  
+        <link rel="stylesheet" href="app/lib/bootstrap-3.1.0/css/bootstrap-theme.css" />  
+        
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"> </script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"> </script>
+        <![endif]-->      
+    </head>
+    <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Trello Planning Poker</a>
+                </div>
+                <!--<div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#/events">Events</a></li>
+                        <li><a href="#/eventItems">Items</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->-->
+            </div>
+        </div>
+        
+        <div class="container">
+            <div ng-view></div>
+        </div><!-- /.container -->
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"> </script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"> </script>
+        <script src="app/lib/jquery.touchpunch.js"> </script>
+        
+        <script src="app/lib/bootstrap-3.1.0/js/bootstrap.min.js"> </script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+        <script src="app/lib/underscore.js"> </script>
+        <script src="app/lib/angular/angular.js"> </script>
+        <script src="app/lib/angular/angular-route.js"> </script>
+        <script src="app/js/app.js"> </script>
+        
+        <script src="app/js/services.js"> </script>
+        <script src="app/js/services/trelloService.js"> </script>
+        <script src="app/js/services/gameService.js"> </script>
+        
+        <script src="app/js/controllers.js"> </script>
+        <script src="app/js/controllers/startController.js"> </script>        
+        <script src="app/js/controllers/gameController.js"> </script>        
+        <script src="app/js/controllers/cardController.js"> </script>        
+        
+        <script src="app/js/filters.js"> </script>
+        <script src="app/js/directives.js"> </script>
+        <script src="app/js/directives/sortable.js"> </script>
+        
+        <script src="https://api.trello.com/1/client.js?key=484ddb54a74ef4e2f8b53a92653ce8d2"> </script>
+        <script src="http://underscorejs.org/underscore-min.js"> </script>
+        
+        <script type="text/javascript">
+            $(function () {
+                $("ul.navbar-nav li a").click(function () {
+                    $("ul.navbar-nav li").removeClass("active");
+                    $(this).parent().addClass("active");
+                });
+            });
+        </script>
+    </body>
 </html>

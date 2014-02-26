@@ -4,6 +4,11 @@ namespace TrelloPlanningPoker.Domain
 {
     public class Game : IEntity
     {
-        public Guid Id { get; private set; }
+        public virtual Guid Id { get; set; }
+        public virtual string Creator { get; set; }
+        public virtual DateTime Created { get; set; }
+        public virtual string BoardId { get; set; }
+        public virtual string ListId { get; set; }
+        public virtual string[] CardIds { get; set; }
     }
 }

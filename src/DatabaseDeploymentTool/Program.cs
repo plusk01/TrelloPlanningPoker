@@ -27,7 +27,7 @@ namespace DatabaseDeploymentTool
             //shouldHashPasswords = true;
 
             MsSqlConfiguration databaseConfiguration =
-                MsSqlConfiguration.MsSql2008.ShowSql().ConnectionString(x => x.FromConnectionStringWithKey("APIzer"));
+                MsSqlConfiguration.MsSql2008.ShowSql().ConnectionString(x => x.FromConnectionStringWithKey("PlanningPoker"));
 
             DatabaseDeployer dd = null;
             ISessionFactory sessionFactory = new SessionFactoryBuilder(new MappingScheme(), databaseConfiguration)

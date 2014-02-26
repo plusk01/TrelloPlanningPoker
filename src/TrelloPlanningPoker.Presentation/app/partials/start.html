@@ -1,0 +1,12 @@
+﻿<h2>Game Creation Wizard</h2>
+
+<h4>Welcome {{user.fullName}}</h4>
+
+<p>Board: 
+    <select ng-show="boards" ng-model="board" ng-options="b.name for b in boards" ng-change="selectBoard(board)"></select>
+    <span ng-hide="boards">Loading boards...</span>
+</p>
+
+<p ng-show="lists">List: <select ng-model="list" ng-options="l.name for l in lists"></select></p>
+
+<p ng-show="list"><button class="btn btn-primary btn-lg" ng-click="createGame()">Create Game</button></p>
