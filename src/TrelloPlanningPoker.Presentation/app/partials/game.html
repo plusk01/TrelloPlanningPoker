@@ -50,7 +50,7 @@
         <span class="glyphicon glyphicon-heart"></span>&nbsp;<strong>You rock!</strong> Your points were successfully applied to your cards in Trello. You are intellegent, amazing, and irresistible to the opposite sex!        
     </div>
 
-    <p ng-hide="almostApplying">
+    <p ng-hide="almostApplying" ng-show="isCreator">
         <button class="btn btn-primary" ng-click="startApplyProcess()">Apply To Trello</button>
     </p>
     <p ng-show="almostApplying">

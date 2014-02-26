@@ -20,6 +20,7 @@ angular.module('myApp.controllers')
 
                 trello.getUser().then(function(user) {
                     $scope.user = user;
+                    $scope.isCreator = user.username == $scope.game.creator;
                 });
 
                 var intervalId;
