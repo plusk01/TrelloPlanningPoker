@@ -1,7 +1,7 @@
 <connectionStrings>
   <!--Development-->
-  <add name="PlanningPoker" connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=PlanningPoker;integrated security=true" />
-  
+  <!--<add name="PlanningPoker" connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=PlanningPoker;integrated security=true" />-->
+
   <!--Beta-->
-  <!--<add name="PlanningPoker" connectionString="Server=f287b316-5cbe-4900-a461-a22d01890720.sqlserver.sequelizer.com;Database=dbf287b3165cbe4900a461a22d01890720;User ID=zyojnksvddadolor;Password=xioBX4HYb5pXnhU5h8XLJiuuX42EbR3VduMAawFawSuJj4MaveaHK6fpW2L3cdXr;" />-->
+  <add name="PlanningPoker" connectionString="Server=4d46e065-f077-4489-9446-a2de012a5f67.sqlserver.sequelizer.com;Database=db4d46e065f07744899446a2de012a5f67;User ID=gcqvqytstppdefwf;Password=dGVHMJZhxSMZpyDiysb6XtHHVdFzgybX8wtoAJBMoDB4s3CufAQYk5yS8mVJcyb8;" />
 </connectionStrings>
