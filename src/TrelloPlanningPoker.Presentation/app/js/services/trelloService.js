@@ -2,13 +2,48 @@
 angular.module('myApp.services')
     .service('trelloService', ['$q', function($q) {
 
-        var authenticate = function (onAuth) {
+        var authErrorCallback = function() {
+            connectWithTrello();
+        };
 
-            
+        var connectWithTrello = function (onAuth) {
+            Trello.authorize({
+                interactive: true,
+                persist: true,
+                success: function () {
+                    onAuth();
+                },
+                error: function () {
+                    throw new Error("Trello auth error!");
+                },
+                scope: { write: true, read: true },
+                name: "Trello Planning Poker",
+            });
         };
         
-        
+        var authenticate = function (callback) {
+            Trello.authorize({
+                interactive: false,
+                success: function () {
+                    callback();
+                },
+                error: function () {
+                    console.log("Trello not logged in.");
+                    if (authErrorCallback) authErrorCallback();
+                }
+            });
+        };
+
         return {
+            onAuthError: function (callback) {
+                authErrorCallback = callback;
+            },
+            connect: function(onAuth) {
+                connectWithTrello(onAuth);
+            },
+            disconnect: function() {
+                Trello.deauthorize();
+            },
             getUser: function() {
                 var def = $q.defer();
                 authenticate(function() {

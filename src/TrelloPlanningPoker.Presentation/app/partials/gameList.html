@@ -1,7 +1,5 @@
 ﻿<div ng-show="isLoading">Loading games...</div>
 <div ng-hide="isLoading">
-    <h4>Welcome {{user.fullName}}</h4>
-
     <ul>
         <li ng-repeat="g in games"><a ng-href="#/game/{{g.id}}">{{g.name || g.id}}</a></li>
     </ul>

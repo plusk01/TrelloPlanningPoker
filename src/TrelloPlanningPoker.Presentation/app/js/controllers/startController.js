@@ -3,6 +3,12 @@ angular.module('myApp.controllers')
     .controller('startController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService',
         function($window, $scope, $routeParams, trello, game) {
 
+            trello.onAuthError(function () {
+                $window.location.href = "#/login";
+            });
+
+            console.log($scope.list);
+            
             if (!$scope.user) {
                 trello.getUser().then(function(u) {
 
@@ -10,8 +16,7 @@ angular.module('myApp.controllers')
 
                     $scope.selectBoard = function(board) {
 
-                        trello.getLists(board.id).then(function(lists) {
-
+                        trello.getLists(board.id).then(function(lists) {                            
                             $scope.lists = lists;
                         });
                     };

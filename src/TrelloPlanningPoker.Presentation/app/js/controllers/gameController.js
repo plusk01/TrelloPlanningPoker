@@ -1,12 +1,12 @@
 ﻿'use strict';
 angular.module('myApp.controllers')
-    .controller('gameController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService',
-        function($window, $scope, $routeParams, trello, game) {
-
+    .controller('gameController', ['$rootScope','$window', '$scope', '$routeParams', 'trelloService', 'gameService',
+        function ($rootScope, $window, $scope, $routeParams, trello, game) {
+            
             $scope.isLoading = true;
 
             $scope.applyOptions = [{ name: 'Maximum', value: 'maximum' }, { name: 'Minimum', value: 'minimum' }, { name: 'Average', value: 'average' }];
-
+            
             game.get($routeParams.id).then(function(response) {
                 $scope.game = response.data;
 
@@ -22,7 +22,7 @@ angular.module('myApp.controllers')
                     $scope.user = user;
                     $scope.isCreator = user.username == $scope.game.creator;
                 });
-
+                
                 var intervalId;
 
                 $scope.viewCard = function(cardId) {

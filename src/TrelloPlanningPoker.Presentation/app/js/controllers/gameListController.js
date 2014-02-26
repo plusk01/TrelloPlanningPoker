@@ -3,6 +3,10 @@ angular.module('myApp.controllers')
     .controller('gameListController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService',
         function ($window, $scope, $routeParams, trello, game) {
 
+            trello.onAuthError(function () {
+                $window.location.href = "#/login";
+            });
+
             $scope.isLoading = true;
             
             trello.getUser().then(function (user) {

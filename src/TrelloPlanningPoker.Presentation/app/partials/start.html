@@ -1,14 +1,25 @@
-﻿<h2>Game Creation Wizard</h2>
+﻿<div>
+    <p>
+        <h3>Step 1:</h3>
+        <p>Select a trello board:</p>
+        <select ng-show="boards" ng-model="board" ng-options="b.name for b in boards" ng-change="selectBoard(board)"></select>
+        <span ng-hide="boards">Loading boards...</span>
+    </p>
 
-<h4>Welcome {{user.fullName}}</h4>
+    <div ng-show="lists">
+        <h3>Step 2:</h3>
+        <p>Select a list: </p>
+        <select ng-model="list" ng-options="l.name for l in lists" ng-change="selectList(list)"></select>
+    </div>
 
-<p>Board: 
-    <select ng-show="boards" ng-model="board" ng-options="b.name for b in boards" ng-change="selectBoard(board)"></select>
-    <span ng-hide="boards">Loading boards...</span>
-</p>
-
-<p ng-show="lists">List: <select ng-model="list" ng-options="l.name for l in lists" ng-change="selectList(list)"></select></p>
-
-<p ng-show="list">Game Name: <input ng-model="name" placeholder="{{tempName}}" /></p>
-
-<p ng-show="list"><button class="btn btn-primary btn-lg" ng-click="createGame()">Create Game</button></p>
+    <div ng-hide="!list">
+        <h3>Step 3:</h3>
+        <p>Give the game a name: (optional)</p> 
+        <input ng-model="name" placeholder="{{tempName}}" /> 
+    </div>
+    
+    <br />
+    <p>
+        <button ng-show="list" class="btn btn-primary btn-lg" ng-click="createGame()">Create Game</button>
+    </p>
+</div>
