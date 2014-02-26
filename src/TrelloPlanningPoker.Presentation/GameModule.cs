@@ -20,6 +20,11 @@ namespace TrelloPlanningPoker.Presentation
                                            var gameId = Guid.Parse(r.gameId);
                                            return GetGame(gameId);
                                        };
+            Get["games/{username}"] = r =>
+                                          {
+                                              var username = (string) r.username;
+                                              return _session.QueryOver<Game>().Where(x => x.Creator == username).List();
+                                          };
         }
 
         dynamic GetGame(Guid gameId)
@@ -37,7 +42,7 @@ namespace TrelloPlanningPoker.Presentation
                                   Created = DateTime.Now,
                                   BoardId = input.BoardId,
                                   ListId = input.ListId,
-                                  CardIds = input.CardIds
+                                  Name = input.Name
                               };
             _session.Save(newGame);
             return newGame;
@@ -49,6 +54,6 @@ namespace TrelloPlanningPoker.Presentation
         public string Username { get; set; }
         public string BoardId { get; set; }
         public string ListId { get; set; }
-        public string[] CardIds { get; set; }
+        public string Name { get; set; }
     }
 }

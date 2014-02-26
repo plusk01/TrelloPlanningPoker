@@ -3,14 +3,18 @@ angular.module('myApp.controllers')
     .controller('gameController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService',
         function($window, $scope, $routeParams, trello, game) {
 
-            game.get($routeParams.id).then(function (response) {
+            $scope.isLoading = true;
+
+            $scope.applyOptions = [{ name: 'Maximum', value: 'maximum' }, { name: 'Minimum', value: 'minimum' }, { name: 'Average', value: 'average' }];
+
+            game.get($routeParams.id).then(function(response) {
                 $scope.game = response.data;
-                
-                trello.getBoard($scope.game.boardId).then(function (board) {
+
+                trello.getBoard($scope.game.boardId).then(function(board) {
                     $scope.board = board;
                 });
 
-                trello.getList($scope.game.listId).then(function (list) {
+                trello.getList($scope.game.listId).then(function(list) {
                     $scope.list = list;
                 });
 
@@ -20,12 +24,12 @@ angular.module('myApp.controllers')
 
                 var intervalId;
 
-                $scope.viewCard = function (cardId) {
+                $scope.viewCard = function(cardId) {
                     clearInterval(intervalId);
                     $window.location.href = "#/game/" + $scope.game.id + "/" + cardId;
                 };
-                
-                var getAggregateSizes = function () {
+
+                var getAggregateSizes = function() {
                     var doWork = function() {
                         game.getAggregateSizes($scope.game.id).then(function(r) {
                             var aggregates = r.data;
@@ -38,15 +42,18 @@ angular.module('myApp.controllers')
                                 }
                                 return c;
                             });
+
+                            $scope.isLoading = false;
+
                         });
                     };
 
                     intervalId = setInterval(doWork, 1000);
                 };
-                
-                trello.getCards($scope.game.listId).then(function (cards) {
+
+                trello.getCards($scope.game.listId).then(function(cards) {
                     var num = 1;
-                    $scope.cards = _.map(cards, function (c) {
+                    $scope.cards = _.map(cards, function(c) {
                         c.name = c.name.replace(/\(\d+\) /g, '');
                         c.number = num;
                         num++;
@@ -55,29 +62,36 @@ angular.module('myApp.controllers')
                     getAggregateSizes();
                 });
 
-                $scope.applyPointsToCardsInTrello = function () {
+                $scope.startApplyProcess = function () {
+                    $scope.successfullyAppliedPointsToCards = false;
+                    $scope.almostApplying = true;
+                };
+
+                $scope.applyPointsToCardsInTrello = function(applyFrom) {
 
                     $scope.isApplying = true;
                     $scope.cardsApplied = 0;
-                    
-                    var filteredCards = _.filter($scope.cards, function (c) {
+
+                    var filteredCards = _.filter($scope.cards, function(c) {
                         return c.aggregateSize;
                     });
-                    
-                    var cardsWithPoints = _.map(filteredCards, function (c) {
+
+                    var cardsWithPoints = _.map(filteredCards, function(c) {
                         return {
                             name: c.name,
                             id: c.id,
-                            points: c.aggregateSize.maximum
+                            points: c.aggregateSize[applyFrom.value]
                         };
                     });
-                    
+
                     $scope.totalCardsWithPoints = cardsWithPoints.length;
-                    
-                    trello.applyPoints($scope.board.id, $scope.list.id, cardsWithPoints, function (num) {
-                        $scope.cardsApplied = num;
-                    }).then(function () {
+
+                    trello.applyPoints($scope.board.id, $scope.list.id, cardsWithPoints, function(updatedCard) {
+
+                    }).then(function() {
                         $scope.isApplying = false;
+                        $scope.almostApplying = false;
+                        $scope.successfullyAppliedPointsToCards = true;
                     });
                 };
             });

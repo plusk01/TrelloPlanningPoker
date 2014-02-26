@@ -1,33 +1,35 @@
-﻿<h1>{{card.name}}</h1>
-<span class="selectedSize">{{selectedSize}}</span>
+﻿<div ng-show="isLoading">Loading card...</div>
+<div ng-hide="isLoading">
+    <h1>{{card.name}}</h1>
 
-<p>{{card.description}}</p>
-<p><a href="{{card.url}}" target="_blank">View Card</a></p>
+    <p>{{card.description}}</p>
+    <p><a href="{{card.url}}" target="_blank">View Card</a></p>
 
-<div class="sizes" ng-show="user">
-    <div class="size" ng-repeat="size in sizes">
-        <button ng-click="setSize(size)" class="btn btn-lg">{{size}}</button>
+    <div class="sizes" ng-show="user">
+        <div class="size" ng-repeat="size in sizes">
+            <button ng-click="setSize(size)" class="btn btn-lg">{{size}}</button>
+        </div>
     </div>
-</div>
 
-<div class="allSizes" ng-show="allSizes">
-    <h3>All Sizes</h3>
-    <table>
-        <thead>
-            <th>User</th>
-            <th>Points</th>
-            <th>Date/Time</th>
-        </thead>
-        <tbody>
-            <tr ng-repeat="s in allSizes">
-                <td>{{s.username}}</td>
-                <td>{{s.points}}</td>
-                <td>{{s.created}}</td>
-            </tr>
-        </tbody>
-    </table>        
+    <div class="allSizes" ng-show="allSizes">
+        <h3>All Sizes</h3>
+        <table>
+            <thead>
+                <th>User</th>
+                <th>Points</th>
+                <th>Date/Time</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="s in allSizes">
+                    <td>{{s.username}}</td>
+                    <td>{{s.points}}</td>
+                    <td>{{s.created}}</td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+    <br/>
+    <p>
+        <button class="btn btn-primary" ng-click="goBackToGame()">Back to Card List</button>
+    </p>
 </div>
-<br/>
-<p>
-    <button class="btn btn-primary" ng-click="goBackToGame()">Back to Card List</button>
-</p>

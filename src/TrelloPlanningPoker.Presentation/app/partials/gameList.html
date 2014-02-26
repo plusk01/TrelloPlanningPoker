@@ -1,0 +1,5 @@
+﻿<ul>
+    <li ng-repeat="g in games"><a ng-href="#/game/{{g.id}}">{{g.name || g.id}}</a></li>
+</ul>
+
+<button ng-click="startNewGame()" class="btn btn-primary">Start New Game</button>

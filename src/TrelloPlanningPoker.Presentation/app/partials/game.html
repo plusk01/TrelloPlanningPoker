@@ -1,43 +1,60 @@
-﻿<h1>{{board.name}}/{{list.name}}</h1>
-<p>Started on {{game.created}} by {{game.creator}}</p>
+﻿<div ng-show="isLoading" class="loading">Loading game...</div>
+<div ng-hide="isLoading">
+    <table style='vertical-align: central; width: 100%;'>
+        <tr>
+            <td><h1>{{game.name || board.name+'/'+list.name}}</h1></td>
+            <td style='text-align: right;'>Board/List: {{board.name}}/{{list.name}}<br/>
+                Started: {{game.created}}<br/>
+                Creator: {{game.creator}}</td>
+        </tr>
+    </table>
+    
+    <p>
+        <table class="cards">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Avg</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in cards">
+                    <td>{{c.number}}</td>
+                    <td><a ng-click="viewCard(c.id)">{{c.name}}</a></td>
+                    <td>{{c.aggregateSize.average}}</td>
+                    <td>{{c.aggregateSize.minimum}}</td>
+                    <td>{{c.aggregateSize.maximum}}</td>
+                    <td>{{c.aggregateSize.count}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>        
+    </p>
 
-<p>
-    <table class="cards">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Avg</th>
-                <th>Min</th>
-                <th>Max</th>
-                <th>Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="c in cards">
-                <td>{{c.number}}</td>
-                <td><a ng-click="viewCard(c.id)">{{c.name}}</a></td>
-                <td>{{c.aggregateSize.average}}</td>
-                <td>{{c.aggregateSize.min}}</td>
-                <td>{{c.aggregateSize.max}}</td>
-                <td>{{c.aggregateSize.count}}</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tfoot>
-    </table>        
-</p>
+    <br/>
+    
+    <div class="alert alert-success" ng-show="successfullyAppliedPointsToCards">        
+        <span class="glyphicon glyphicon-heart"></span>&nbsp;<strong>You rock!</strong> Your points were successfully applied to your cards in Trello. You are intellegent, amazing, and irresistible to the opposite sex!        
+    </div>
 
-<br/>
-<p>
-    <button class="btn btn-primary" ng-click="applyPointsToCardsInTrello()">Apply To Trello</button>
-    <span ng-show="isApplying">Finished: {{cardsApplied}} of {{totalCardsWithPoints}}</span>    
-</p>
+    <p ng-hide="almostApplying">
+        <button class="btn btn-primary" ng-click="startApplyProcess()">Apply To Trello</button>
+    </p>
+    <p ng-show="almostApplying">
+        <select ng-model="applyFrom" ng-options="o.name for o in applyOptions"></select>
+        <button ng-disabled="isApplying || !applyFrom" class="btn btn-primary" ng-click="applyPointsToCardsInTrello(applyFrom)">Apply</button>    
+    </p>
+</div>

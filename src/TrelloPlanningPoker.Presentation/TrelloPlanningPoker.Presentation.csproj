@@ -89,6 +89,7 @@
     <Content Include="app\js\controllers.js" />
     <Content Include="app\js\controllers\cardController.js" />
     <Content Include="app\js\controllers\gameController.js" />
+    <Content Include="app\js\controllers\gameListController.js" />
     <Content Include="app\js\controllers\startController.js" />
     <Content Include="app\js\directives.js" />
     <Content Include="app\js\directives\sortable.js" />
@@ -1075,6 +1076,7 @@
     <Content Include="app\lib\underscore.js" />
     <Content Include="app\partials\card.html" />
     <Content Include="app\partials\game.html" />
+    <Content Include="app\partials\gameList.html" />
     <Content Include="app\partials\start.html" />
     <Content Include="favicon.ico" />
     <Content Include="index.html" />

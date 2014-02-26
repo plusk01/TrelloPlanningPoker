@@ -7,6 +7,8 @@
     <span ng-hide="boards">Loading boards...</span>
 </p>
 
-<p ng-show="lists">List: <select ng-model="list" ng-options="l.name for l in lists"></select></p>
+<p ng-show="lists">List: <select ng-model="list" ng-options="l.name for l in lists" ng-change="selectList(list)"></select></p>
+
+<p ng-show="list">Game Name: <input ng-model="name" placeholder="{{tempName}}" /></p>
 
 <p ng-show="list"><button class="btn btn-primary btn-lg" ng-click="createGame()">Create Game</button></p>

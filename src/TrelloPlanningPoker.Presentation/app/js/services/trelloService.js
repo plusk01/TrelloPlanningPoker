@@ -88,7 +88,6 @@ angular.module('myApp.services')
                     });
 
                     $q.all(work).then(function () {
-                        debugger;
                         def.resolve();
                     });
                 });

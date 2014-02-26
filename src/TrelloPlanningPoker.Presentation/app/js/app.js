@@ -11,13 +11,9 @@ angular.module('myApp', [
 ]).
     config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/start', { templateUrl: 'app/partials/start.html', controller: 'startController' });
+        $routeProvider.when('/games', { templateUrl: 'app/partials/gameList.html', controller: 'gameListController' });
         $routeProvider.when('/game/:id', { templateUrl: 'app/partials/game.html', controller: 'gameController' });
         $routeProvider.when('/game/:gameId/:cardId', { templateUrl: 'app/partials/card.html', controller: 'cardController' });
-        //$routeProvider.when('/event/:id', { templateUrl: 'app/partials/eventDetails.html', controller: 'eventsController' });
-
-        //$routeProvider.when('/createEventItem', { templateUrl: 'app/partials/createEventItem.html', controller: 'eventItemsController' });
-        //$routeProvider.when('/eventItems', { templateUrl: 'app/partials/eventItems.html', controller: 'eventItemsController' });
-        //$routeProvider.when('/eventItem/:id', { templateUrl: 'app/partials/eventItemDetails.html', controller: 'eventItemsController' });
-
-        $routeProvider.otherwise({ redirectTo: '/start' });
+        
+        $routeProvider.otherwise({ redirectTo: '/games' });
     }]);

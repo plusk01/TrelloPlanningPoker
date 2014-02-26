@@ -3,6 +3,8 @@ angular.module('myApp.controllers')
     .controller('cardController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService',
         function($window, $scope, $routeParams, trello, game) {
 
+            $scope.isLoading = true;
+            
             $scope.sizes = [1, 2, 3, 5, 8, 13, 21];
 
             var intervalId;
@@ -12,6 +14,8 @@ angular.module('myApp.controllers')
                     game.getSizes($scope.card.id).then(function(response) {
                         $scope.allSizes = response.data;
                     });
+                    
+                    $scope.isLoading = false;
                 };
 
                 getEm();
