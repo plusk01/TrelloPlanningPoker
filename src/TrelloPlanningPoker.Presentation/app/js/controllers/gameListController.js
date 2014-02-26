@@ -3,11 +3,14 @@ angular.module('myApp.controllers')
     .controller('gameListController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService',
         function ($window, $scope, $routeParams, trello, game) {
 
+            $scope.isLoading = true;
+            
             trello.getUser().then(function (user) {
                 $scope.user = user;
 
                 game.getAll(user.username).then(function (response) {
-                    $scope.games = response.data;                    
+                    $scope.games = response.data;
+                    $scope.isLoading = false;
                 });
             });
 

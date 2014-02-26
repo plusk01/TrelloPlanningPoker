@@ -3,15 +3,23 @@ angular.module('myApp.services')
     .service('trelloService', ['$q', function($q) {
 
         var authenticate = function(callback) {
+
             Trello.authorize({
+                error: function () {
+                    Trello.authorize({
+                        success: callback,
+                        interactive: true,
+                        scope: { write: true, read: true },
+                        name: "Trello Planning Poker",
+                        persist: true
+                    });
+                },
                 success: callback,
                 interactive: false,
-                scope: { write: true, read: true },
-                name: "Trello Planning Poker",
-                persist: true
             });
         };
-
+        
+        
         return {
             getUser: function() {
                 var def = $q.defer();
