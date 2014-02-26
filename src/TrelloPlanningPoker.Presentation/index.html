@@ -13,7 +13,32 @@
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"> </script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"> </script>
-        <![endif]-->      
+        <![endif]-->   
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"> </script>
+        <script src="https://api.trello.com/1/client.js?key=484ddb54a74ef4e2f8b53a92653ce8d2"> </script>
+        
+        <script type="text/javascript">
+            $(function () {
+                $("ul.navbar-nav li a").click(function () {
+                    $("ul.navbar-nav li").removeClass("active");
+                    $(this).parent().addClass("active");
+                });
+
+                Trello.authorize({
+                    interactive: false,
+                    success: onAuth,
+                    error: function () {
+                        Trello.authorize({
+                            expiration: "never",
+                            scope: { read: true, write: true },
+                            //success: onAuth,
+                            name: "Trello Planning Poker"
+                        });
+                    }
+                });
+            });
+        </script>   
     </head>
     <body>
         
@@ -35,8 +60,8 @@
             <div ng-view></div>
         </div><!-- /.container -->
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"> </script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"> </script>
+        <script src="http://underscorejs.org/underscore-min.js"> </script>
         <script src="app/lib/jquery.touchpunch.js"> </script>
         
         <script src="app/lib/bootstrap-3.1.0/js/bootstrap.min.js"> </script>
@@ -58,31 +83,6 @@
         
         <script src="app/js/filters.js"> </script>
         <script src="app/js/directives.js"> </script>
-        <script src="app/js/directives/sortable.js"> </script>
-        
-        <script src="https://api.trello.com/1/client.js?key=484ddb54a74ef4e2f8b53a92653ce8d2"> </script>
-        <script src="http://underscorejs.org/underscore-min.js"> </script>
-        
-        <script type="text/javascript">
-            $(function () {
-                $("ul.navbar-nav li a").click(function () {
-                    $("ul.navbar-nav li").removeClass("active");
-                    $(this).parent().addClass("active");
-                });
-                
-                Trello.authorize({
-                    interactive: false,
-                    success: onAuth,
-                    error: function () {
-                        Trello.authorize({
-                            expiration: "never",
-                            scope: { read: true, write: true },
-                            success: onAuth,
-                            name: "Trello Planning Poker"
-                        });
-                    }
-                });
-            });
-        </script>
+        <script src="app/js/directives/sortable.js"> </script>        
     </body>
 </html>
