@@ -4,18 +4,7 @@ angular.module('myApp.services')
 
         var authenticate = function (onAuth) {
 
-            Trello.authorize({
-                interactive: false,
-                success: onAuth,
-                error: function() {
-                    Trello.authorize({
-                        expiration: "never",
-                        scope: { read: true, write: true },
-                        success: onAuth,
-                        name: "Trello Planning Poker"
-                    });
-                }
-            });
+            
         };
         
         

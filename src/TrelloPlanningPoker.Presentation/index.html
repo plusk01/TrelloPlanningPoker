@@ -69,6 +69,19 @@
                     $("ul.navbar-nav li").removeClass("active");
                     $(this).parent().addClass("active");
                 });
+                
+                Trello.authorize({
+                    interactive: false,
+                    success: onAuth,
+                    error: function () {
+                        Trello.authorize({
+                            expiration: "never",
+                            scope: { read: true, write: true },
+                            success: onAuth,
+                            name: "Trello Planning Poker"
+                        });
+                    }
+                });
             });
         </script>
     </body>
