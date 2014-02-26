@@ -28,13 +28,8 @@ angular.module('myApp.controllers')
                 
                 trello.getUser().then(function (user) {
                     $scope.user = user;
-
-                    game.getSize(user.username, card.id).then(function (response) {
-                        if (response.data) {
-                            $scope.selectedSize = response.data.points;
-                            getSizes();
-                        }
-                    });
+                    getSizes();
+                    
                 });
             });
 
