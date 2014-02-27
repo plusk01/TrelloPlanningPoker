@@ -16,8 +16,10 @@ angular.module('myApp.controllers')
                     return;
                 }
                 
-                $scope.game = response.data;                
+                $scope.game = response.data;
 
+                $scope.gameUrl = document.URL;
+                
                 trello.getBoard($scope.game.boardId).then(function(board) {
                     $scope.board = board;
                 });

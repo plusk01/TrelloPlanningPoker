@@ -2,10 +2,9 @@
 <div ng-hide="isLoading">
     <div class="alert alert-info">
         <span style="float: right; width: 100px; text-align: right; "><a href="{{card.url}}" target="_blank">View Card<br/> in Trello</a></span>
-        <h2>{{card.name}}</h2>
+        <h2><span ng-show="card.points" title="Current Points" class="badge"><h2>{{card.points}}</h2></span> {{card.name}}</h2>
         <p>{{card.description}}</p>        
     </div>
-    
     
     <div class="sizes" ng-show="user">
         <div class="size" ng-repeat="size in sizes">

@@ -12,7 +12,7 @@ ul.touchList li { font-size: 1.3em; }
 .allSizes table tbody tr td { padding-right: 10px;}
 
 table.cards{ width: 100%;}
-table.cards thead tr th { background-color: #EEEEEE;}
+table.cards thead tr th { background-color: #EEEEEE;padding-right: 10px;}
 table.cards tbody tr td { border-bottom: #CCCCCC solid 1px;padding-top: 4px;padding-bottom: 4px;}
 table.cards tbody tr td  a { cursor: pointer; }
 
