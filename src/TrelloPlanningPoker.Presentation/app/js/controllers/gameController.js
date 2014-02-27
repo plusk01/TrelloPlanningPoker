@@ -88,7 +88,11 @@ angular.module('myApp.controllers')
                     $scope.totalCardsWithPoints = cardsWithPoints.length;
 
                     trello.applyPoints($scope.board.id, $scope.list.id, cardsWithPoints, function(updatedCard) {
-
+                        _.each($scope.cards, function(c) {
+                            if (c.id == updatedCard.id) {
+                                c.points = updatedCard.points;
+                            }
+                        });
                     }).then(function() {
                         $scope.isApplying = false;
                         $scope.almostApplying = false;

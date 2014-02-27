@@ -137,8 +137,9 @@ angular.module('myApp.services')
                     _.each(cardsWithPoints, function(c) {
                         var nameWithoutPoints = c.name.replace(/\(\d+\) /g, '');
                         var newName = "(" + c.points + ") " + nameWithoutPoints;
-                        work.push(Trello.put("/cards/" + c.id, { name: newName }, function(response) {
-                            onProgress(response);
+                        work.push(Trello.put("/cards/" + c.id, { name: newName }, function (card) {
+                            card.points = c.points;
+                            onProgress(card);
                         }));
                     });
 
