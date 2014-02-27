@@ -15,4 +15,4 @@ table.cards{ width: 100%;}
 table.cards thead tr th { background-color: #EEEEEE;}
 table.cards tbody tr td { border-bottom: #CCCCCC solid 1px;}
 
-.hiddenOnStart{ display: none;}
+.hiddenOnStart{ display: none; }
