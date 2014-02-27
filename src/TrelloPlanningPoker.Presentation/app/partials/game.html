@@ -1,5 +1,11 @@
 ﻿<div ng-show="isLoading" class="loading">Loading game...</div>
-<div ng-hide="isLoading">
+<div ng-hide="gameExists">    
+    <div class="alert alert-danger">
+        <h3>That game doesn't exist or has been removed.</h3>
+    </div>
+</div>
+
+<div ng-hide="isLoading || !gameExists">
     
     <div class="alert alert-info">
     
@@ -56,9 +62,14 @@
         <span class="glyphicon glyphicon-heart"></span>&nbsp;<strong>You rock!</strong> Your points were successfully applied to your cards in Trello. You are intellegent, amazing, and irresistible to the opposite sex!        
     </div>
 
+    <p class="pull-right" ng-show="isCreator">
+        <button class="btn btn-danger" ng-click="deleteGame()">Delete Game</button>
+    </p>
+
     <p ng-hide="almostApplying" ng-show="isCreator">
         <button class="btn btn-primary" ng-click="startApplyProcess()">Apply To Trello</button>
     </p>
+
     <p ng-show="almostApplying" class="input-group-lg">
         <select ng-model="applyFrom" ng-options="o.name for o in applyOptions"></select>
         <button ng-disabled="isApplying || !applyFrom" class="btn btn-primary" ng-click="applyPointsToCardsInTrello(applyFrom)">Apply</button>    

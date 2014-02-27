@@ -23,6 +23,9 @@ angular.module('myApp.services')
             },
             getSize: function(username, cardId) {
                 return $http.get("/card/" + cardId + "/" + username + "/size");
+            },
+            'delete': function(gameId) {
+                return $http.delete("/game/" + gameId);
             }
         };
     }]);

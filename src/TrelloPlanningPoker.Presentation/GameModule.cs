@@ -25,6 +25,13 @@ namespace TrelloPlanningPoker.Presentation
                                               var username = (string) r.username;
                                               return _session.QueryOver<Game>().Where(x => x.Creator == username).List();
                                           };
+            Delete["game/{gameId}"] = r =>
+                                          {
+                                              Guid gameId = Guid.Parse(r.gameId);
+                                              var game = _session.Get<Game>(gameId);
+                                              _session.Delete(game);
+                                              return new Response();
+                                          };
         }
 
         dynamic GetGame(Guid gameId)

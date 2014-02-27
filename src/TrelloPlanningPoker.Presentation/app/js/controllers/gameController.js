@@ -1,14 +1,22 @@
 ﻿'use strict';
 angular.module('myApp.controllers')
-    .controller('gameController', ['$rootScope','$window', '$scope', '$routeParams', 'trelloService', 'gameService',
-        function ($rootScope, $window, $scope, $routeParams, trello, game) {
-            
+    .controller('gameController', ['$rootScope', '$window', '$scope', '$routeParams', 'trelloService', 'gameService',
+        function($rootScope, $window, $scope, $routeParams, trello, game) {
+
             $scope.isLoading = true;
+            $scope.gameExists = true;
 
             $scope.applyOptions = [{ name: 'Maximum', value: 'maximum' }, { name: 'Minimum', value: 'minimum' }, { name: 'Average', value: 'average' }];
-            
+
             game.get($routeParams.id).then(function(response) {
-                $scope.game = response.data;
+
+                if (!response.data) {
+                    $scope.isLoading = false;
+                    $scope.gameExists = false;
+                    return;
+                }
+                
+                $scope.game = response.data;                
 
                 trello.getBoard($scope.game.boardId).then(function(board) {
                     $scope.board = board;
@@ -22,7 +30,7 @@ angular.module('myApp.controllers')
                     $scope.user = user;
                     $scope.isCreator = user.username == $scope.game.creator;
                 });
-                
+
                 var intervalId;
 
                 $scope.viewCard = function(cardId) {
@@ -63,7 +71,7 @@ angular.module('myApp.controllers')
                     getAggregateSizes();
                 });
 
-                $scope.startApplyProcess = function () {
+                $scope.startApplyProcess = function() {
                     $scope.successfullyAppliedPointsToCards = false;
                     $scope.almostApplying = true;
                 };
@@ -98,6 +106,14 @@ angular.module('myApp.controllers')
                         $scope.almostApplying = false;
                         $scope.successfullyAppliedPointsToCards = true;
                     });
+                };
+
+                $scope.deleteGame = function() {
+                    if (confirm("Are you sure you want to delete this game?")) {
+                        game.delete($scope.game.id).then(function() {
+                            $window.location.href = "#/games";
+                        });
+                    }
                 };
             });
         }]);
