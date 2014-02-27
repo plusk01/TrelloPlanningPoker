@@ -34,6 +34,20 @@ angular.module('myApp.services')
             });
         };
 
+        var pointPattern = /\([0-9]+(.[0-9]+)?\)/g;
+        
+        var removePointsFromName = function(name) {
+            var newName = name.replace(pointPattern, '').trim();
+            return newName;
+        };
+
+        var getPointsFromName = function (name) {
+            var pointsSection = name.match(pointPattern);
+            if (!pointsSection) return;
+            var points = pointsSection[0].replace('(', '').replace(')', '');
+            return points;
+        };
+
         return {
             onAuthError: function (callback) {
                 authErrorCallback = callback;
@@ -94,7 +108,9 @@ angular.module('myApp.services')
                 authenticate(function() {
                     Trello.get("/lists/" + listId + "/cards", function (cards) {
                         cards = _.map(cards, function (c) {
-                            c.name = c.name.replace(/\(\d+\) /g, '');
+                            var originalCardName = c.name;
+                            c.name = removePointsFromName(originalCardName);
+                            c.points = getPointsFromName(originalCardName);
                             return c;
                         });
                         def.resolve(cards);
@@ -106,7 +122,9 @@ angular.module('myApp.services')
                 var def = $q.defer();
                 authenticate(function() {
                     Trello.get("/cards/" + cardId, function (card) {
-                        card.name = card.name.replace(/\(\d+\) /g, '');
+                        var originalCardName = card.name;
+                        card.name = removePointsFromName(originalCardName);
+                        card.points = getPointsFromName(originalCardName);
                         def.resolve(card);
                     });
                 });

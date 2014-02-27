@@ -19,6 +19,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Current</th>
                     <th>Avg</th>
                     <th>Min</th>
                     <th>Max</th>
@@ -29,6 +30,7 @@
                 <tr ng-repeat="c in cards">
                     <td>{{c.number}}</td>
                     <td><a ng-click="viewCard(c.id)">{{c.name}}</a></td>
+                    <td><span class="badge">{{c.points}}</span></td>
                     <td><span class="badge">{{c.aggregateSize.average}}</span></td>
                     <td><span class="badge">{{c.aggregateSize.minimum}}</span></td>
                     <td><span class="badge">{{c.aggregateSize.maximum}}</span></td>

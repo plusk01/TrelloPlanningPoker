@@ -55,7 +55,7 @@ angular.module('myApp.controllers')
                 trello.getCards($scope.game.listId).then(function(cards) {
                     var num = 1;
                     $scope.cards = _.map(cards, function(c) {
-                        c.name = c.name.replace(/\(\d+\) /g, '');
+                        c.name = c.name;
                         c.number = num;
                         num++;
                         return c;
