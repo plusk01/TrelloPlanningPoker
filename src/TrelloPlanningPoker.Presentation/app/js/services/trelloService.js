@@ -92,7 +92,11 @@ angular.module('myApp.services')
             getCards: function(listId) {
                 var def = $q.defer();
                 authenticate(function() {
-                    Trello.get("/lists/" + listId + "/cards", function(cards) {
+                    Trello.get("/lists/" + listId + "/cards", function (cards) {
+                        cards = _.map(cards, function (c) {
+                            c.name = c.name.replace(/\(\d+\) /g, '');
+                            return c;
+                        });
                         def.resolve(cards);
                     });
                 });
@@ -101,7 +105,8 @@ angular.module('myApp.services')
             getCard: function(cardId) {
                 var def = $q.defer();
                 authenticate(function() {
-                    Trello.get("/cards/" + cardId, function(card) {
+                    Trello.get("/cards/" + cardId, function (card) {
+                        card.name = card.name.replace(/\(\d+\) /g, '');
                         def.resolve(card);
                     });
                 });

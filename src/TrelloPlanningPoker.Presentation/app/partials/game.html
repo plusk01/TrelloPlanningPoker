@@ -1,13 +1,17 @@
 ﻿<div ng-show="isLoading" class="loading">Loading game...</div>
 <div ng-hide="isLoading">
-    <table style='vertical-align: central; width: 100%;'>
-        <tr>
-            <td><h1>{{game.name || board.name+'/'+list.name}}</h1></td>
-            <td style='text-align: right;'>Board/List: {{board.name}}/{{list.name}}<br/>
-                Started: {{game.created}}<br/>
-                Creator: {{game.creator}}</td>
-        </tr>
-    </table>
+    
+    <div class="alert alert-info">
+    
+        <table style='vertical-align: central; width: 100%;'>
+            <tr>
+                <td><h1>{{game.name || board.name+'/'+list.name}}</h1></td>
+                <td style='text-align: right;'>Board/List: {{board.name}}/{{list.name}}<br/>
+                    Started: {{game.created}}<br/>
+                    Creator: {{game.creator}}</td>
+            </tr>
+        </table>
+    </div>
     
     <p>
         <table class="cards">
@@ -25,10 +29,10 @@
                 <tr ng-repeat="c in cards">
                     <td>{{c.number}}</td>
                     <td><a ng-click="viewCard(c.id)">{{c.name}}</a></td>
-                    <td>{{c.aggregateSize.average}}</td>
-                    <td>{{c.aggregateSize.minimum}}</td>
-                    <td>{{c.aggregateSize.maximum}}</td>
-                    <td>{{c.aggregateSize.count}}</td>
+                    <td><span class="badge">{{c.aggregateSize.average}}</span></td>
+                    <td><span class="badge">{{c.aggregateSize.minimum}}</span></td>
+                    <td><span class="badge">{{c.aggregateSize.maximum}}</span></td>
+                    <td><span class="badge">{{c.aggregateSize.count}}</span></td>
                 </tr>
             </tbody>
             <tfoot>
@@ -53,7 +57,7 @@
     <p ng-hide="almostApplying" ng-show="isCreator">
         <button class="btn btn-primary" ng-click="startApplyProcess()">Apply To Trello</button>
     </p>
-    <p ng-show="almostApplying">
+    <p ng-show="almostApplying" class="input-group-lg">
         <select ng-model="applyFrom" ng-options="o.name for o in applyOptions"></select>
         <button ng-disabled="isApplying || !applyFrom" class="btn btn-primary" ng-click="applyPointsToCardsInTrello(applyFrom)">Apply</button>    
     </p>

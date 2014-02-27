@@ -1080,6 +1080,7 @@
     <Content Include="app\partials\gameList.html" />
     <Content Include="app\partials\login.html" />
     <Content Include="app\partials\start.html" />
+    <Content Include="app\partials\support.html" />
     <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="index.html" />
@@ -1163,6 +1164,7 @@
     <Content Include="app\lib\jquery-ui-1.10.4\ui\.jshintrc" />
     <Content Include="app\lib\localStorageDb\CHANGELOG" />
     <Content Include="app\lib\localStorageDb\README.md" />
+    <Content Include="app\js\controllers\supportController.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

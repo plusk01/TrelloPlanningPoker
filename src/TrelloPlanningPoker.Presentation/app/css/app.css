@@ -13,6 +13,9 @@ ul.touchList li { font-size: 1.3em; }
 
 table.cards{ width: 100%;}
 table.cards thead tr th { background-color: #EEEEEE;}
-table.cards tbody tr td { border-bottom: #CCCCCC solid 1px;}
+table.cards tbody tr td { border-bottom: #CCCCCC solid 1px;padding-top: 4px;padding-bottom: 4px;}
+table.cards tbody tr td  a { cursor: pointer; }
 
 .hiddenOnStart{ display: none; }
+
+.alert h1, .alert h2, .alert h3 { margin-top: 10px;}

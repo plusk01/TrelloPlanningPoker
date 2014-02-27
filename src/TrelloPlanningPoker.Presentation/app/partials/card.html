@@ -1,14 +1,17 @@
 ﻿<div ng-show="isLoading">Loading card...</div>
 <div ng-hide="isLoading">
-    <h1>{{card.name}}</h1>
-
-    <p>{{card.description}}</p>
-    <p><a href="{{card.url}}" target="_blank">View Card</a></p>
-
+    <div class="alert alert-info">
+        <span style="float: right; width: 100px; text-align: right; "><a href="{{card.url}}" target="_blank">View Card<br/> in Trello</a></span>
+        <h2>{{card.name}}</h2>
+        <p>{{card.description}}</p>        
+    </div>
+    
+    
     <div class="sizes" ng-show="user">
         <div class="size" ng-repeat="size in sizes">
             <button ng-click="setSize(size)" class="btn btn-lg">{{size}}</button>
         </div>
+        <button class="size btn btn-lg btn-primary" ng-click="goBackToGame()">Back to Game</button>
     </div>
 
     <div class="allSizes" ng-show="allSizes">
@@ -28,8 +31,5 @@
             </tbody>
         </table>        
     </div>
-    <br/>
-    <p>
-        <button class="btn btn-primary" ng-click="goBackToGame()">Back to Game</button>
-    </p>
+    <br/>    
 </div>

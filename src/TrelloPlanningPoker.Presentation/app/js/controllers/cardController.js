@@ -46,5 +46,5 @@ angular.module('myApp.controllers')
             $scope.goBackToGame = function() {
                 clearInterval(intervalId);
                 $window.location.href = "/#/game/" + $scope.game.id;
-            };
+            };            
         }]);
