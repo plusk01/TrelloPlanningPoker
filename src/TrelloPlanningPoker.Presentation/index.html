@@ -40,9 +40,9 @@
                         <li><a href="#/start">New Game</a></li>
                     </ul>
                     <div class="navbar-search pull-right" style='margin-top:10px;'>
-                        <button class="btn btn-sm btn-success" ng-hide="user" ng-click="connect()">Connect to Trello</button>
-                        <span class="text-primary" ng-show="user">Welcome {{user.fullName}}</span>&nbsp;
-                        <button class="btn btn-sm" ng-show="user" ng-click="disconnect()">Disconnect</button>                        
+                        <button class="hiddenOnStart btn btn-sm btn-success" ng-hide="user" ng-click="connect()">Connect to Trello</button>
+                        <span class="hiddenOnStart text-primary" ng-show="user">Welcome {{user.fullName}}</span>&nbsp;
+                        <button class="hiddenOnStart btn btn-sm" ng-show="user" ng-click="disconnect()">Disconnect</button>                        
                     </div>
                 </div><!--/.nav-collapse -->
             </div>

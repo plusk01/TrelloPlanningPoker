@@ -37,5 +37,6 @@ angular.module('myApp', [
             $scope.user = null;
             $window.location.href = "#/login";
         };
-        
+
+        $(".hiddenOnStart").show();
     }]);
