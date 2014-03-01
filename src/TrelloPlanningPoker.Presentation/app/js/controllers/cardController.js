@@ -13,6 +13,11 @@ angular.module('myApp.controllers')
                 var getEm = function() {
                     game.getSizes($scope.card.id).then(function(response) {
                         $scope.allSizes = response.data;
+
+                        _.each($scope.allSizes, function(s) {
+                            if (s.username == $scope.user.username)
+                                $scope.selectedSize = s.points;
+                        });
                     });
                     
                     $scope.isLoading = false;
