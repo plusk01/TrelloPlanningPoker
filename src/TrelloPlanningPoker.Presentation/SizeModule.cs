@@ -91,14 +91,14 @@ namespace TrelloPlanningPoker.Presentation
         public string CardId { get; set; }
         public int Number { get; set; }
         public double Average { get; set; }
-        public int Minimum { get; set; }
-        public int Maximum { get; set; }
+        public double Minimum { get; set; }
+        public double Maximum { get; set; }
         public int Count { get; set; }
     }
 
     public class NewSizeInput
     {
         public string Username { get; set; }
-        public int Points { get; set; }
+        public double Points { get; set; }
     }
 }

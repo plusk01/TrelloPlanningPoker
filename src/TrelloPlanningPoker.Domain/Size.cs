@@ -6,7 +6,7 @@ namespace TrelloPlanningPoker.Domain
     {
         public virtual Guid Id { get; set; }
 
-        public virtual int Points { get; set; }
+        public virtual double Points { get; set; }
 
         public virtual string Username { get; set; }
 
