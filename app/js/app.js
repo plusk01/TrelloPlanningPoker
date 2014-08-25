@@ -13,7 +13,6 @@ angular.module('myApp', [
         $routeProvider.when('/login', { templateUrl: 'partials/login.html', controller: 'loginController' });
         $routeProvider.when('/start', { templateUrl: 'partials/start.html', controller: 'startController' });
         $routeProvider.when('/games', { templateUrl: 'partials/gameList.html', controller: 'gameListController' });
-        $routeProvider.when('/support', { templateUrl: 'partials/support.html', controller: 'supportController' });
         $routeProvider.when('/', { templateUrl: 'partials/gameList.html', controller: 'gameListController' });
         $routeProvider.when('/game/:id', { templateUrl: 'partials/game.html', controller: 'gameController' });
         $routeProvider.when('/game/:gameId/:cardId', { templateUrl: 'partials/card.html', controller: 'cardController' });
@@ -36,8 +35,8 @@ angular.module('myApp', [
         $scope.disconnect = function () {
             trello.disconnect();
             $scope.user = null;
-            $window.location.href = "#/login";
+            $window.location.href = '#/login';
         };
 
-        $(".hiddenOnStart").show();
+        $('.hiddenOnStart').show();
     }]);
