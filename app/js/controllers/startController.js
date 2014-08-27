@@ -1,7 +1,9 @@
 ﻿'use strict';
 angular.module('myApp.controllers')
-    .controller('startController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService',
-        function($window, $scope, $routeParams, trello, game) {
+    .controller('startController', ['$window', '$scope', '$routeParams', 'trelloService', 'gameService', 'firebaseService',
+        function($window, $scope, $routeParams, trello, game, firebase) {
+
+            // firebase.$asObject().$bindTo($scope, 'games');
 
             trello.onAuthError(function() {
                 $window.location.href = "#/login";
@@ -29,9 +31,16 @@ angular.module('myApp.controllers')
 
             $scope.createGame = function() {
                 if (!$scope.name) $scope.name = $scope.tempName;
-                game.create($scope.user.username, $scope.board.id, $scope.list.id, $scope.name).then(function(gameInfo) {
-                    $window.location.href = "/#/game/" + gameInfo.data.id;
+
+                game.createNew($scope.user, $scope.board, $scope.list, $scope.name).then(function() {
+                    $window.location.href = "/#/game/" + $scope.list.id;
+                }, function() {
+                    console.log("error!");
                 });
+                    
+                // game.createNew($scope.user.id, $scope.board.id, $scope.list.id, $scope.name).then(function(gameInfo) {
+                //     $window.location.href = "/#/game/" + gameInfo.data.id;
+                // });
             };
 
         }]);

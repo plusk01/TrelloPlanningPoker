@@ -1,8 +1,32 @@
 ﻿'use strict';
 angular.module('myApp.services')
-    .service('gameService', ['$q', '$http', function($q, $http) {
+    .service('gameService', ['$q', 'firebaseService', function($q, firebase) {
 
         return {
+            createNew: function(user, board, list, name) {
+                var deferred = $q.defer();
+
+                firebase.then(function(scope) {
+                    if (scope.games.hasOwnProperty(list.id)) {
+                        deferred.reject();
+                    } else {
+                        // Let's make it!
+                        scope.games[list.id] = {
+                            info: {
+                                name: name,
+                                user: user,
+                                board: board,
+                                list: list
+                            }
+                        };
+
+                        deferred.resolve();
+
+                    }
+                });
+
+                return deferred.promise;
+            },
             create: function(username, boardId, listId, name) {
                 return $http.post("/game", { username: username, boardId: boardId, listId: listId, name: name });
             },
